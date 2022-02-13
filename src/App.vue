@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <TheNavigation />
+    <transition name="fade" mode="out-in">
+      <router-view :key="$route.path" />
+    </transition>
   </div>
 </template>
-
+<script>
+import TheNavigation from "@/components/TheNavigation";
+export default {
+  components: {
+    TheNavigation,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -17,16 +23,23 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave {
+  opacity: 0;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+input {
+  border: 1px solid green;
+  padding: 10px;
+  margin-bottom: 20px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.btn {
+  background-color: green;
+  color: white;
+  padding: 10px;
 }
 </style>
